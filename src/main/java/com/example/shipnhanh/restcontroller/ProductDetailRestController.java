@@ -43,7 +43,6 @@ public class ProductDetailRestController {
             prddt.setPrice2(new BigDecimal(param.getPrice2().intValue()));
         }
 
-
         return service.save(prddt);
     }
 

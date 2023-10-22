@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("admin/rest/product") @CrossOrigin("*")
+@RequestMapping("admin/rest/product")
+@CrossOrigin("*")
 public class ProductRestController {
     @Autowired
     ProductmImpl service;
@@ -18,8 +19,7 @@ public class ProductRestController {
     @GetMapping("/getall/{page}")
     public Page<ProductsEntity> getALL(
             @PathVariable("page") Integer page,
-            @RequestParam("seach") String seach
-    ){
+            @RequestParam("seach") String seach){
         if(seach.length()==0 || seach==null || seach.equals("undefined")){
             return service.findAll(page,5);
         }else{
