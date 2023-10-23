@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBt_WdT28nvJjhTqOHFeh4rNlpzLCO3uYM&libraries=places"></script>
+</head>
+
+<body ng-controller="PlaceSearchController as ctrl">
+
+    <input type="text" id="placeInput" placeholder="Tìm địa điểm...">
+    <div id="map" style="height: 400px; width: 100%;"></div>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('PlaceSearchController', function ($scope) {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 10.7769, lng: 106.7009 }, // Giả sử ban đầu là vị trí TP.HCM
+                zoom: 15
+            });
+
+            var input = document.getElementById('placeInput');
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            searchBox.addListener('places_changed', function () {
+              
+                var places = searchBox.getPlaces();
+                console.log(places);
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Hiển thị vị trí cần tìm trên bản đồ
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+
+                    // Tạo markers cho mỗi nơi tìm được
+                    new google.maps.Marker({
+                        map: map,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+
+                    // Nếu nơi này có kích thước vùng được xác định
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
