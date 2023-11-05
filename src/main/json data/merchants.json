@@ -1,0 +1,95 @@
+[
+    {
+        "type": "header",
+        "version": "5.2.1",
+        "comment": "Export to JSON plugin for PHPMyAdmin"
+    },
+    {
+        "type": "database",
+        "name": "shipnhanh"
+    },
+    {
+        "type": "table",
+        "name": "merchants",
+        "database": "shipnhanh",
+        "data": [
+            {
+                "id": "1",
+                "latitude": "56",
+                "longitude": "43",
+                "timeclose": "22:21:00.000000",
+                "timeopen": "23:22:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 1",
+                "numberphone": "0365776577"
+            },
+            {
+                "id": "2",
+                "latitude": "56",
+                "longitude": "43",
+                "timeclose": "22:21:00.000000",
+                "timeopen": "23:22:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 2",
+                "numberphone": "0356657765"
+            },
+            {
+                "id": "3",
+                "latitude": "56",
+                "longitude": "43",
+                "timeclose": "22:21:00.000000",
+                "timeopen": "23:22:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 3",
+                "numberphone": "0356657765"
+            },
+            {
+                "id": "4",
+                "latitude": "56",
+                "longitude": "43",
+                "timeclose": "22:21:00.000000",
+                "timeopen": "23:22:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 4",
+                "numberphone": "0357765899"
+            },
+            {
+                "id": "5",
+                "latitude": "5",
+                "longitude": "43",
+                "timeclose": "19:38:00.000000",
+                "timeopen": "19:38:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 5",
+                "numberphone": "0957765554"
+            },
+            {
+                "id": "6",
+                "latitude": "56",
+                "longitude": "43",
+                "timeclose": "19:38:00.000000",
+                "timeopen": "19:38:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 6",
+                "numberphone": "0356657765"
+            },
+            {
+                "id": "7",
+                "latitude": "5",
+                "longitude": "43",
+                "timeclose": "19:38:00.000000",
+                "timeopen": "19:38:00.000000",
+                "address": "342",
+                "image": null,
+                "name": "cửa hàng 6",
+                "numberphone": "0957765554"
+            }
+        ]
+    }
+]
