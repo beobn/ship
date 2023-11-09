@@ -75,7 +75,6 @@ public class ProductDetailImpl implements ProductDetailService {
         prddt.setStatus(x.getStatus());
         prddt.setProduct((productRepository.findById(x.getIdProduct())));
         prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
-        prddt.setSize(x.getIdSize());
         return prddt;
     }
 

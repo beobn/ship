@@ -5,12 +5,15 @@ import com.example.shipnhanh.exception.Validate;
 import com.example.shipnhanh.service.impl.AccountImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("rest/account") @CrossOrigin("*")
+@RequestMapping("rest/account")
+@CrossOrigin("*")
 public class AccountRestController {
 
     @Autowired
@@ -40,17 +43,18 @@ public class AccountRestController {
     }
 
     @GetMapping("/register")
-    public AccountEntity Register(
+    public ResponseEntity<AccountEntity> Register(
             @RequestParam("phone") String phone,
             @RequestParam("pass") String pass
     ){
-        AccountEntity x = new AccountEntity();
-        x.setNumberphone(validate.convertNumberPhone(phone));
-        x.setPassword(validate.isValidateString(pass));
-        x.setPay(new BigDecimal(0));
-        x.setRole(0);
-        x.setCheckboom(0);
-        return service.save(x);
+        AccountEntity account = new AccountEntity();
+        account.setNumberphone(validate.convertNumberPhone(phone));
+        account.setPassword(validate.isValidateString(pass));
+        account.setPay(new BigDecimal(0));
+        account.setRole(0);
+        account.setCheckboom(0);
+        service.save(account);
+        return ResponseEntity.ok (account);
     }
 
 }

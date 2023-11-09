@@ -2,39 +2,60 @@ package com.example.shipnhanh.restcontroller;
 
 
 import com.example.shipnhanh.entity.ProductsEntity;
-import com.example.shipnhanh.service.impl.ProductmImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.shipnhanh.repository.ProductRepository;
+import com.example.shipnhanh.service.ProductService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("admin/rest/product")
 @CrossOrigin("*")
 public class ProductRestController {
-    @Autowired
-    ProductmImpl service;
+
+
+    private final ProductRepository productRepository;
+    private final ProductService productService;
+
+    private List<ProductsEntity> productsEntities = null;
+
+    public ProductRestController(ProductRepository productRepository, ProductService productService) {
+        this.productRepository = productRepository;
+        this.productService = productService;
+    }
 
     @GetMapping("/getall/{page}")
-    public Page<ProductsEntity> getALL(
+    public ResponseEntity<Page<ProductsEntity>> getALL(
             @PathVariable("page") Integer page,
-            @RequestParam("seach") String seach){
-        if(seach.length()==0 || seach==null || seach.equals("undefined")){
-            return service.findAll(page,5);
+            @RequestParam("nameProduct") String nameProduct){
+        if(nameProduct.length()==0 || nameProduct==null){
+            return ResponseEntity.ok ().body (productService.findAll(page,20));
         }else{
-            return service.findByName(page,5,seach);
+            return ResponseEntity.ok ().body (productService.findByName(page,20,nameProduct));
         }
-
     }
 
     @PostMapping ("/save")
     public ProductsEntity save(@RequestBody ProductsEntity param){
-        return service.save(param);
+        return productService.save(param);
     }
 
     @GetMapping("/find_id")
-    public ProductsEntity getname(@RequestParam("id") Integer id){
-        return service.findByID(id);
+    public ResponseEntity<ProductsEntity> getProductDetail(@RequestParam("id") Integer id){
+
+        return ResponseEntity.ok ().body (productService.findByID(id));
     }
+
+    @GetMapping("/find_top_product_recently")
+    public ResponseEntity<List<String>> getTopProductRecently() throws IOException {
+        List<String> nameListStr = productRepository.findProductRecently();
+        if (nameListStr.isEmpty () || nameListStr.size () == 0){
+            return  ResponseEntity.status (HttpStatus.NO_CONTENT).body (nameListStr);
+        }
+        return  ResponseEntity.ok ().body (nameListStr);
+    }
+
 }

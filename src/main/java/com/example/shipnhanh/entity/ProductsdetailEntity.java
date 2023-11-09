@@ -1,12 +1,18 @@
 package com.example.shipnhanh.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "productsdetail", schema = "shipnhanh", catalog = "")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductsdetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,9 +24,9 @@ public class ProductsdetailEntity {
     @Basic
     @Column(name = "idProduct")
     private int idProduct;
-    @Basic
-    @Column(name = "idSize")
-    private int idSize;
+//    @Basic
+//    @Column(name = "idSize")
+//    private int idSize;
     @Basic
     @Column(name = "price1")
     private BigDecimal price1;
@@ -55,14 +61,6 @@ public class ProductsdetailEntity {
         this.idProduct = idProduct;
     }
 
-    public int getIdSize() {
-        return idSize;
-    }
-
-    public void setIdSize(int idSize) {
-        this.idSize = idSize;
-    }
-
     public BigDecimal getPrice1() {
         return price1;
     }
@@ -92,11 +90,12 @@ public class ProductsdetailEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductsdetailEntity that = (ProductsdetailEntity) o;
-        return id == that.id && idMerchants == that.idMerchants && idProduct == that.idProduct && idSize == that.idSize && status == that.status && Objects.equals(price1, that.price1) && Objects.equals(price2, that.price2);
+        return id == that.id && idMerchants == that.idMerchants && idProduct == that.idProduct
+                && status == that.status && Objects.equals(price1, that.price1) && Objects.equals(price2, that.price2);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idMerchants, idProduct, idSize, price1, price2, status);
+        return Objects.hash(id, idMerchants, idProduct, price1, price2, status);
     }
 }
