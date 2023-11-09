@@ -12,6 +12,6 @@ public interface ProductService {
     public ProductsEntity findByID(Integer id);
     Page<ProductsEntity> findAll(int pageNumber, int maxRecord);
 
-    Page<ProductsEntity> findByName(int pageNumber, int maxRecord, String name);
+    Page<ProductsEntity> findByName(int pageNumber, int maxRecord, String nameProduct);
 
 }

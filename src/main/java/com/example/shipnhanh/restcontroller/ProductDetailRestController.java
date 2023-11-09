@@ -36,7 +36,6 @@ public class ProductDetailRestController {
         prddt.setIdMerchants(param.getMerchants().getId());
         prddt.setIdProduct(param.getProduct().getId());
         prddt.setPrice1(new BigDecimal(param.getPrice1().intValue()));
-        prddt.setIdSize(param.getSize());
         if(param.getSize()==1){
             prddt.setPrice2(new BigDecimal(0));
         }else{
