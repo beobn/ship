@@ -43,13 +43,12 @@ public class ProductRestController {
         return productService.save(param);
     }
 
-    @GetMapping("/find_id")
+    @GetMapping("/find-id")
     public ResponseEntity<ProductsEntity> getProductDetail(@RequestParam("id") Integer id){
-
         return ResponseEntity.ok ().body (productService.findByID(id));
     }
 
-    @GetMapping("/find_top_product_recently")
+    @GetMapping("/find-top-product-recently")
     public ResponseEntity<List<String>> getTopProductRecently() throws IOException {
         List<String> nameListStr = productRepository.findProductRecently();
         if (nameListStr.isEmpty () || nameListStr.size () == 0){
@@ -58,4 +57,12 @@ public class ProductRestController {
         return  ResponseEntity.ok ().body (nameListStr);
     }
 
+    @GetMapping("/find-name-product")
+    public ResponseEntity<ProductsEntity>  findByNameLike(@RequestParam("nameProduct")String nameProduct){
+        if ( nameProduct.equals ("")){
+            System.out.println ("null name product");
+            return  ResponseEntity.badRequest ().build ();
+        }
+        return ResponseEntity.ok ().body (productRepository.findByNameLike (nameProduct).get ());
+    }
 }

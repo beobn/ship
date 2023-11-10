@@ -15,4 +15,5 @@ public interface MerchantsRepository extends PagingAndSortingRepository<Merchant
 
     @Query(value = "select * from merchants where name like %?%",nativeQuery = true)
     Page<MerchantsEntity> findByName(String name,Pageable pageable);
+
 }

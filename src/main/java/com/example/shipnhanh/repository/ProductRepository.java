@@ -27,6 +27,6 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductsEn
     @Query(value = "select p.name from products p  order by p.time_seach desc limit 5",nativeQuery = true)
     List<String> findProductRecently();
 
-    Optional<ProductsEntity> findByName(String nameProduct);
+    Optional<ProductsEntity> findByNameLike (String nameProduct);
 
 }
