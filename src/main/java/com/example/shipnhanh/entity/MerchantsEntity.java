@@ -1,17 +1,25 @@
 package com.example.shipnhanh.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Time;
 import java.util.Objects;
 
 @Entity
 @Table(name = "merchants", schema = "shipnhanh", catalog = "")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MerchantsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "name")
     private String name;
@@ -37,78 +45,8 @@ public class MerchantsEntity {
     @Column(name = "timeclose")
     private Time timeclose;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getNumberphone() {
-        return numberphone;
-    }
-
-    public void setNumberphone(String numberphone) {
-        this.numberphone = numberphone;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Time getTimeopen() {
-        return timeopen;
-    }
-
-    public void setTimeopen(Time timeopen) {
-        this.timeopen = timeopen;
-    }
-
-    public Time getTimeclose() {
-        return timeclose;
-    }
-
-    public void setTimeclose(Time timeclose) {
-        this.timeclose = timeclose;
-    }
-
+    @Column(name = "product_id")
+    private Long productId;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
