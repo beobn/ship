@@ -32,15 +32,15 @@ public class ProductDetailRestController {
     @PostMapping ("/save")
     public ProductsdetailEntity save(@RequestBody ProductDetailDTO param){
         ProductsdetailEntity prddt = new ProductsdetailEntity();
-        prddt.setId(param.getId());
-        prddt.setIdMerchants(param.getMerchants().getId());
-        prddt.setIdProduct(param.getProduct().getId());
-        prddt.setPrice1(new BigDecimal(param.getPrice1().intValue()));
-        if(param.getSize()==1){
-            prddt.setPrice2(new BigDecimal(0));
-        }else{
-            prddt.setPrice2(new BigDecimal(param.getPrice2().intValue()));
-        }
+        //prddt.setId(param.getId());
+//        prddt.setIdMerchants(param.getMerchants().getId());
+//        prddt.setIdProduct(param.getProduct().getId());
+//        prddt.setPrice1(new BigDecimal(param.getPrice1().intValue()));
+//        if(param.getSize()==1){
+//            prddt.setPrice2(new BigDecimal(0));
+//        }else{
+//            prddt.setPrice2(new BigDecimal(param.getPrice2().intValue()));
+//        }
 
         return service.save(prddt);
     }

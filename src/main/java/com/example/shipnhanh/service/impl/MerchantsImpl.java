@@ -50,7 +50,7 @@ public class MerchantsImpl implements MerchantsService {
 
         MerchantsEntity y = new MerchantsEntity();
         y.setId(x.getId());
-        y.setName(validate.isValidateString(x.getName()));
+        y.setNameMachanse (validate.isValidateString(x.getNameMachanse ()));
         y.setAddress(validate.isValidateString(x.getAddress()));
         y.setLatitude(validate.convertLatitude(x.getLatitude()));
         y.setLongitude(validate.convertLongitude(x.getLongitude()));
