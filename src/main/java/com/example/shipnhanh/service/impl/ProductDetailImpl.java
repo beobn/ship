@@ -57,9 +57,9 @@ public class ProductDetailImpl implements ProductDetailService {
     }
 
     @Override
-    public Page<ProductDetailDTO> findByName(int pageNumber, int maxRecord, String name) {
+    public Page<ProductDetailDTO> findByName(int pageNumber, int maxRecord, String nameProduct) {
         Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductsdetailEntity> page = repository.findByName(name,pageable);
+        Page<ProductsdetailEntity> page = repository.findByName(nameProduct,pageable);
         List<ProductDetailDTO> list = new ArrayList();
         for (int i=0;i<page.getContent().size();i++){
             list.add(convertProductDetailDTO(page.getContent().get(i)));
@@ -69,12 +69,12 @@ public class ProductDetailImpl implements ProductDetailService {
     }
     private ProductDetailDTO convertProductDetailDTO(ProductsdetailEntity x){
         ProductDetailDTO prddt = new ProductDetailDTO();
-        prddt.setId(x.getId());
-        prddt.setPrice1(x.getPrice1());
-        prddt.setPrice2(x.getPrice2());
-        prddt.setStatus(x.getStatus());
-        prddt.setProduct((productRepository.findById(x.getIdProduct())));
-        prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
+//        prddt.setId(x.getId());
+//        prddt.setPrice1(x.getPrice1());
+//        prddt.setPrice2(x.getPrice2());
+//        prddt.setStatus(x.getStatus());
+//        prddt.setProduct((productRepository.findById(x.getIdProduct())));
+//        prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
         return prddt;
     }
 

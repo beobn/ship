@@ -22,7 +22,7 @@ public class MerchantsEntity {
     private Long id;
     @Basic
     @Column(name = "name")
-    private String name;
+    private String nameMachanse;
     @Basic
     @Column(name = "address")
     private String address;
@@ -52,19 +52,19 @@ public class MerchantsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MerchantsEntity that = (MerchantsEntity) o;
-        return id == that.id && Double.compare(that.longitude, longitude) == 0 && Double.compare(that.latitude, latitude) == 0 && Objects.equals(name, that.name) && Objects.equals(address, that.address) && Objects.equals(numberphone, that.numberphone) && Objects.equals(image, that.image) && Objects.equals(timeopen, that.timeopen) && Objects.equals(timeclose, that.timeclose);
+        return id == that.id && Double.compare(that.longitude, longitude) == 0 && Double.compare(that.latitude, latitude) == 0 && Objects.equals(nameMachanse, that.nameMachanse) && Objects.equals(address, that.address) && Objects.equals(numberphone, that.numberphone) && Objects.equals(image, that.image) && Objects.equals(timeopen, that.timeopen) && Objects.equals(timeclose, that.timeclose);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address, longitude, latitude, numberphone, image, timeopen, timeclose);
+        return Objects.hash(id, nameMachanse, address, longitude, latitude, numberphone, image, timeopen, timeclose);
     }
 
     @Override
     public String toString() {
         return "MerchantsEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + nameMachanse + '\'' +
                 ", address='" + address + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +

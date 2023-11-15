@@ -1,6 +1,7 @@
 package com.example.shipnhanh.restcontroller;
 
 
+import com.example.shipnhanh.DTO.ProductDetailDTO;
 import com.example.shipnhanh.entity.ProductsEntity;
 import com.example.shipnhanh.repository.ProductRepository;
 import com.example.shipnhanh.service.ProductService;
@@ -27,16 +28,16 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    @GetMapping("/getall/{page}")
-    public ResponseEntity<Page<ProductsEntity>> getALL(
-            @PathVariable("page") Integer page,
-            @RequestParam("nameProduct") String nameProduct){
-        if(nameProduct.length()==0 || nameProduct==null){
-            return ResponseEntity.ok ().body (productService.findAll(page,20));
-        }else{
-            return ResponseEntity.ok ().body (productService.findByName(page,20,nameProduct));
-        }
-    }
+//    @GetMapping("/getall/{page}")
+//    public ResponseEntity<Page<ProductsEntity>> getALL(
+//            @PathVariable("page") Integer page,
+//            @RequestParam("nameProduct") String nameProduct){
+//        if(nameProduct.length()==0 || nameProduct==null){
+//            return ResponseEntity.ok ().body (productService.findAll(page,20));
+//        }else{
+//            return ResponseEntity.ok ().body (productService.findByName(page,20,nameProduct));
+//        }
+//    }
 
     @PostMapping ("/save")
     public ProductsEntity save(@RequestBody ProductsEntity param){
@@ -64,5 +65,15 @@ public class ProductRestController {
             return  ResponseEntity.badRequest ().build ();
         }
         return ResponseEntity.ok ().body (productRepository.findByNameLike (nameProduct).get ());
+    }
+    @GetMapping("/getall-product-detail/{page}")  // dùng api này get data lên page
+    public ResponseEntity<Page<ProductDetailDTO>> getALLProductAndMechances(
+            @PathVariable("page") Integer page,
+            @RequestParam("nameProduct") String nameProduct){
+//        if(nameProduct.length()==0 || nameProduct==null){
+            return ResponseEntity.ok ().body (productService.findAllProduct (page,20,nameProduct));
+//        }else{
+//            return null;
+//        }
     }
 }
