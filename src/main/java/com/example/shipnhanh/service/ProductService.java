@@ -17,5 +17,5 @@ public interface ProductService {
 
     Page<ProductsEntity> findByName(int pageNumber, int maxRecord, String nameProduct);
 
-    Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct);
+    Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct, Long longitude, Long latitude);
 }

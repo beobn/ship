@@ -76,9 +76,9 @@ public class ProductmImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct) {
+    public Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct,Long longitude, Long latitude) {
         Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductDetailDTO> page = productDetailRepository.findAll (nameProduct,pageable);
+        Page<ProductDetailDTO> page = productDetailRepository.findAll (nameProduct,pageable,longitude,latitude);
         List<ProductDetailDTO> list =  page.getContent ();
         for (int i=0;i< list.size();i++){
             Optional<ProductsEntity> productsEntity = repository.findByName (nameProduct);
