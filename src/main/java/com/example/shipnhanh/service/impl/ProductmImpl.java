@@ -45,7 +45,7 @@ public class ProductmImpl implements ProductService {
             validate.convertLongitude (Double.valueOf (id));
             return null;
         }
-        return repository.findById(id);
+        return repository.findById(id).get ();
     }
 
     @Override
@@ -80,15 +80,16 @@ public class ProductmImpl implements ProductService {
         Pageable pageable = PageRequest.of(pageNumber, maxRecord);
         Page<ProductDetailDTO> page = productDetailRepository.findAll (nameProduct,pageable,longitude,latitude);
         List<ProductDetailDTO> list =  page.getContent ();
-        System.out.println (page.getContent ());
         for (int i=0;i< list.size();i++){
-            Optional<ProductsEntity> productsEntity = repository.findByNameLike (nameProduct);
+            Optional<ProductsEntity> productsEntity = repository.findByName (nameProduct);
             if(productsEntity.isPresent ()) {
                 productsEntity.orElseThrow ().setCountSeach (i++);
                 repository.save (productsEntity.get ());
             }
         }
-       Page<ProductDetailDTO> pagedto = new PageImpl<>(list, pageable, page.getTotalElements());
+        System.out.println (page.getContent ());
+        System.out.println(list.toString ());
+        Page<ProductDetailDTO> pagedto = new PageImpl<>(list, pageable, page.getTotalElements());
         return pagedto;
     }
 
