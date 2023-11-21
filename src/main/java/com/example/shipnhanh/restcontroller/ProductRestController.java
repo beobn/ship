@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("admin/rest/product")
@@ -21,23 +21,13 @@ public class ProductRestController {
     private final ProductRepository productRepository;
     private final ProductService productService;
 
-    private List<ProductsEntity> productsEntities = null;
+//    private final List<ProductsEntity> productsEntities = null;
 
     public ProductRestController(ProductRepository productRepository, ProductService productService) {
         this.productRepository = productRepository;
         this.productService = productService;
     }
 
-//    @GetMapping("/getall/{page}")
-//    public ResponseEntity<Page<ProductsEntity>> getALL(
-//            @PathVariable("page") Integer page,
-//            @RequestParam("nameProduct") String nameProduct){
-//        if(nameProduct.length()==0 || nameProduct==null){
-//            return ResponseEntity.ok ().body (productService.findAll(page,20));
-//        }else{
-//            return ResponseEntity.ok ().body (productService.findByName(page,20,nameProduct));
-//        }
-//    }
 
     @PostMapping ("/save")
     public ProductsEntity save(@RequestBody ProductsEntity param){
@@ -50,9 +40,9 @@ public class ProductRestController {
     }
 
     @GetMapping("/find-top-product-recently")
-    public ResponseEntity<List<String>> getTopProductRecently() throws IOException {
+    public ResponseEntity<List<String>> getTopProductRecently()  {
         List<String> nameListStr = productRepository.findProductRecently();
-        if (nameListStr.isEmpty () || nameListStr.size () == 0){
+        if (nameListStr.isEmpty ()){
             return  ResponseEntity.status (HttpStatus.NO_CONTENT).body (nameListStr);
         }
         return  ResponseEntity.ok ().body (nameListStr);
@@ -60,20 +50,20 @@ public class ProductRestController {
 
     @GetMapping("/find-name-product")
     public ResponseEntity<ProductsEntity>  findByNameLike(@RequestParam("nameProduct")String nameProduct){
-        if ( nameProduct.equals ("")){
+        if ( nameProduct.isEmpty()){
             System.out.println ("null name product");
             return  ResponseEntity.badRequest ().build ();
         }
-        return ResponseEntity.ok ().body (productRepository.findByNameLike (nameProduct).get ());
+        Optional<ProductsEntity>  optionalProductsEntity  = productRepository.findByNameLike (nameProduct);
+        return ResponseEntity.ok ().body (optionalProductsEntity.isPresent() ? optionalProductsEntity.get() : null);
     }
-    @GetMapping("/getall-product-detail/{page}")  // dùng api này get data lên page
+
+    @GetMapping("/getall-product-detail/{page}")  // dùng api này get data  page
     public ResponseEntity<Page<ProductDetailDTO>> getALLProductAndMechances(
             @PathVariable("page") Integer page,
-            @RequestParam("nameProduct") String nameProduct){
-//        if(nameProduct.length()==0 || nameProduct==null){
-            return ResponseEntity.ok ().body (productService.findAllProduct (page,20,nameProduct));
-//        }else{
-//            return null;
-//        }
+            @RequestParam("nameProduct") String nameProduct,
+            @RequestParam("longitude")  Long longitude,
+            @RequestParam("latitude") Long latitude){
+            return ResponseEntity.ok ().body (productService.findAllProduct (page,20,nameProduct,longitude,latitude));
     }
 }

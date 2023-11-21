@@ -26,7 +26,7 @@ public interface ProductDetailRepository extends PagingAndSortingRepository<Prod
     @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status) FROM MerchantsEntity m " +
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON m.id = pd.idProduct " +
-            "WHERE p.name LIKE %:nameProduct%")
-    Page<ProductDetailDTO> findAll(@Param("nameProduct") String nameProduct,Pageable pageable);
+            "WHERE p.name LIKE %:nameProduct% AND m.longitude = :longitude AND m.latitude = :latitude")
+    Page<ProductDetailDTO> findAll(@Param("nameProduct") String nameProduct,Pageable pageable,Long longitude, Long latitude);
 
 }
