@@ -26,7 +26,6 @@ public class ProductDetailRestController {
         }else{
             return service.findByName(page,5,seach);
         }
-
     }
 
     @PostMapping ("/save")
