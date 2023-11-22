@@ -5,9 +5,6 @@ import com.example.shipnhanh.entity.ProductsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-
 @Service
 public interface ProductService {
     public ProductsEntity save(ProductsEntity x);
