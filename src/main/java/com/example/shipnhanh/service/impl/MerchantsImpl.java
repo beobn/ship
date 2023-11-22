@@ -28,7 +28,7 @@ public class MerchantsImpl implements MerchantsService {
     }
 
     @Override
-    public MerchantsEntity findByID(Integer id) {
+    public MerchantsEntity findByID(Long id) {
         return repository.findById(id);
     }
 

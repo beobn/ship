@@ -1,6 +1,5 @@
 package com.example.shipnhanh.restcontroller;
 
-
 import com.example.shipnhanh.DTO.ProductDetailDTO;
 import com.example.shipnhanh.entity.ProductsEntity;
 import com.example.shipnhanh.repository.ProductRepository;

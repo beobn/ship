@@ -2,9 +2,7 @@ package com.example.shipnhanh.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,13 +15,13 @@ public class ProductsdetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "idMerchants")
-    private int idMerchants;
+    private Long idMerchants;
     @Basic
     @Column(name = "idProduct")
-    private int idProduct;
+    private Long idProduct;
 //    @Basic
 //    @Column(name = "idSize")
 //    private int idSize;
@@ -37,53 +35,6 @@ public class ProductsdetailEntity {
     @Column(name = "status")
     private int status;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdMerchants() {
-        return idMerchants;
-    }
-
-    public void setIdMerchants(int idMerchants) {
-        this.idMerchants = idMerchants;
-    }
-
-    public int getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public BigDecimal getPrice1() {
-        return price1;
-    }
-
-    public void setPrice1(BigDecimal price1) {
-        this.price1 = price1;
-    }
-
-    public BigDecimal getPrice2() {
-        return price2;
-    }
-
-    public void setPrice2(BigDecimal price2) {
-        this.price2 = price2;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     @Override
     public boolean equals(Object o) {

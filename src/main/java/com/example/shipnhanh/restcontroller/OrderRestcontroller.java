@@ -2,15 +2,14 @@ package com.example.shipnhanh.restcontroller;
 
 import com.example.shipnhanh.entity.OrderEntity;
 import com.example.shipnhanh.service.OrderService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.io.IOException;
+import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/admin/rest/order")
+@CrossOrigin("*")
 public class OrderRestcontroller {
     private  final OrderService orderService;
 
@@ -19,7 +18,16 @@ public class OrderRestcontroller {
     }
 
     @PostMapping("/saveOrder")
-    public ResponseEntity<OrderEntity> saveOrder (@RequestBody OrderEntity orderEntity) throws IOException{
+    public ResponseEntity<OrderEntity> saveOrder (@RequestBody OrderEntity orderEntity) {
         return   ResponseEntity.ok ().body (orderService.save (orderEntity));
     }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<Page<OrderEntity>> getAllOrder(@PathVariable("page") Integer min, @RequestParam LocalDate startDate,@RequestParam LocalDate endDate){
+        return  ResponseEntity.ok().body(orderService.findAll(min,
+                20,startDate,endDate));
+    }
+
+
+
 }
