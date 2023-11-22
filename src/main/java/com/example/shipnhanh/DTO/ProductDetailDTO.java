@@ -2,26 +2,24 @@ package com.example.shipnhanh.DTO;
 
 import com.example.shipnhanh.entity.MerchantsEntity;
 import com.example.shipnhanh.entity.ProductsEntity;
-import com.example.shipnhanh.entity.SizeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor @ToString
+@NoArgsConstructor
+@ToString
 public class ProductDetailDTO {
-    private int id;
-
-    private MerchantsEntity merchants;
-    private ProductsEntity product;
-    private Integer size;
+    private Long Id;
+    private String name;
+    private String nameMachanse;
+    private String image;
     private BigDecimal price1;
     private BigDecimal price2;
     private Integer status;
-
-
+    private MerchantsEntity merchants;
+    private  ProductsEntity products;
 }

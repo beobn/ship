@@ -1,5 +1,6 @@
 package com.example.shipnhanh.repository;
 
+import com.example.shipnhanh.DTO.ProductDetailDTO;
 import com.example.shipnhanh.entity.MerchantsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,7 @@ public interface MerchantsRepository extends PagingAndSortingRepository<Merchant
 
     MerchantsEntity save(MerchantsEntity x);
 
-    MerchantsEntity findById(Integer id);
+    MerchantsEntity findById(Long id);
 
     @Query(value = "select * from merchants where name like %?%",nativeQuery = true)
     Page<MerchantsEntity> findByName(String name,Pageable pageable);

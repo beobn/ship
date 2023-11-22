@@ -1,0 +1,74 @@
+[
+    {
+        "id": "1",
+        "idMerchants": "5",
+        "idProduct": "5",
+        "idSize": "1",
+        "price1": "10000.00",
+        "price2": "0.00",
+        "status": "0"
+    },
+    {
+        "id": "2",
+        "idMerchants": "2",
+        "idProduct": "5",
+        "idSize": "2",
+        "price1": "10000.00",
+        "price2": "2000.00",
+        "status": "0"
+    },
+    {
+        "id": "3",
+        "idMerchants": "1",
+        "idProduct": "2",
+        "idSize": "2",
+        "price1": "1000.00",
+        "price2": "100000.00",
+        "status": "0"
+    },
+    {
+        "id": "4",
+        "idMerchants": "1",
+        "idProduct": "3",
+        "idSize": "2",
+        "price1": "1000.00",
+        "price2": "100000.00",
+        "status": "0"
+    },
+    {
+        "id": "5",
+        "idMerchants": "1",
+        "idProduct": "5",
+        "idSize": "1",
+        "price1": "1000.00",
+        "price2": "0.00",
+        "status": "0"
+    },
+    {
+        "id": "6",
+        "idMerchants": "2",
+        "idProduct": "5",
+        "idSize": "2",
+        "price1": "1000.00",
+        "price2": "100000.00",
+        "status": "0"
+    },
+    {
+        "id": "7",
+        "idMerchants": "3",
+        "idProduct": "5",
+        "idSize": "2",
+        "price1": "1000.00",
+        "price2": "100000.00",
+        "status": "0"
+    },
+    {
+        "id": "8",
+        "idMerchants": "3",
+        "idProduct": "5",
+        "idSize": "1",
+        "price1": "123445.00",
+        "price2": "0.00",
+        "status": "0"
+    }
+]

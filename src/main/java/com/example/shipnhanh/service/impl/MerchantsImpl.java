@@ -28,7 +28,7 @@ public class MerchantsImpl implements MerchantsService {
     }
 
     @Override
-    public MerchantsEntity findByID(Integer id) {
+    public MerchantsEntity findByID(Long id) {
         return repository.findById(id);
     }
 
@@ -50,7 +50,7 @@ public class MerchantsImpl implements MerchantsService {
 
         MerchantsEntity y = new MerchantsEntity();
         y.setId(x.getId());
-        y.setName(validate.isValidateString(x.getName()));
+        y.setNameMachanse (validate.isValidateString(x.getNameMachanse ()));
         y.setAddress(validate.isValidateString(x.getAddress()));
         y.setLatitude(validate.convertLatitude(x.getLatitude()));
         y.setLongitude(validate.convertLongitude(x.getLongitude()));

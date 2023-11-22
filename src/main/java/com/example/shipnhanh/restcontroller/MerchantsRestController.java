@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController @RequestMapping("admin/rest/merchant") @CrossOrigin("*")
 public class MerchantsRestController {
 
-    @Autowired
-    MerchantsImpl service;
+    private final MerchantsImpl service;
+    public MerchantsRestController(MerchantsImpl service) {
+        this.service = service;
+    }
 
     @GetMapping("/getall/{page}")
     public Page<MerchantsEntity> getALL(
@@ -24,17 +26,15 @@ public class MerchantsRestController {
         }else{
             return service.findByName(page,5,seach);
         }
-
     }
-
 
     @PostMapping("/save")
     public MerchantsEntity save(@RequestBody MerchantsEntity param){
         return service.save(param);
     }
 
-    @GetMapping("/find_id")
-    public MerchantsEntity getname(@RequestParam("id") Integer id){
+    @GetMapping("/find-id")
+    public MerchantsEntity getname(@RequestParam("id") Long id){
         return service.findByID(id);
     }
 

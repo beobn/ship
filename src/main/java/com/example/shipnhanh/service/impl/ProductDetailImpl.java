@@ -3,7 +3,6 @@ package com.example.shipnhanh.service.impl;
 
 
 import com.example.shipnhanh.DTO.ProductDetailDTO;
-import com.example.shipnhanh.entity.ProductsEntity;
 import com.example.shipnhanh.entity.ProductsdetailEntity;
 import com.example.shipnhanh.repository.*;
 import com.example.shipnhanh.service.ProductDetailService;
@@ -57,9 +56,9 @@ public class ProductDetailImpl implements ProductDetailService {
     }
 
     @Override
-    public Page<ProductDetailDTO> findByName(int pageNumber, int maxRecord, String name) {
+    public Page<ProductDetailDTO> findByName(int pageNumber, int maxRecord, String nameProduct) {
         Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductsdetailEntity> page = repository.findByName(name,pageable);
+        Page<ProductsdetailEntity> page = repository.findByName(nameProduct,pageable);
         List<ProductDetailDTO> list = new ArrayList();
         for (int i=0;i<page.getContent().size();i++){
             list.add(convertProductDetailDTO(page.getContent().get(i)));
@@ -73,9 +72,8 @@ public class ProductDetailImpl implements ProductDetailService {
         prddt.setPrice1(x.getPrice1());
         prddt.setPrice2(x.getPrice2());
         prddt.setStatus(x.getStatus());
-        prddt.setProduct((productRepository.findById(x.getIdProduct())));
+        prddt.setProducts(productRepository.findById(x.getIdProduct()).get());
         prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
-        prddt.setSize(x.getIdSize());
         return prddt;
     }
 
