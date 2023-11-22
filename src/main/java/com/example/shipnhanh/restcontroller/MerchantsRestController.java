@@ -34,7 +34,7 @@ public class MerchantsRestController {
     }
 
     @GetMapping("/find-id")
-    public MerchantsEntity getname(@RequestParam("id") Integer id){
+    public MerchantsEntity getname(@RequestParam("id") Long id){
         return service.findByID(id);
     }
 

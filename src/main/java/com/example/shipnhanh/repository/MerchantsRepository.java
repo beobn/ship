@@ -12,7 +12,7 @@ public interface MerchantsRepository extends PagingAndSortingRepository<Merchant
 
     MerchantsEntity save(MerchantsEntity x);
 
-    MerchantsEntity findById(Integer id);
+    MerchantsEntity findById(Long id);
 
     @Query(value = "select * from merchants where name like %?%",nativeQuery = true)
     Page<MerchantsEntity> findByName(String name,Pageable pageable);

@@ -3,7 +3,6 @@ package com.example.shipnhanh.service.impl;
 
 
 import com.example.shipnhanh.DTO.ProductDetailDTO;
-import com.example.shipnhanh.entity.ProductsEntity;
 import com.example.shipnhanh.entity.ProductsdetailEntity;
 import com.example.shipnhanh.repository.*;
 import com.example.shipnhanh.service.ProductDetailService;
@@ -69,12 +68,12 @@ public class ProductDetailImpl implements ProductDetailService {
     }
     private ProductDetailDTO convertProductDetailDTO(ProductsdetailEntity x){
         ProductDetailDTO prddt = new ProductDetailDTO();
-//        prddt.setId(x.getId());
-//        prddt.setPrice1(x.getPrice1());
-//        prddt.setPrice2(x.getPrice2());
-//        prddt.setStatus(x.getStatus());
-//        prddt.setProduct((productRepository.findById(x.getIdProduct())));
-//        prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
+        prddt.setId(x.getId());
+        prddt.setPrice1(x.getPrice1());
+        prddt.setPrice2(x.getPrice2());
+        prddt.setStatus(x.getStatus());
+        prddt.setProducts(productRepository.findById(x.getIdProduct()).get());
+        prddt.setMerchants(merchantsRepository.findById(x.getIdMerchants()));
         return prddt;
     }
 

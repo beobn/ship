@@ -16,7 +16,7 @@ public interface ProductRepository extends JpaRepository<ProductsEntity,Integer>
     @Query(value = "update products set image = null where image = ?", nativeQuery = true) // xoas anhr
     public void deleteImage(String image);
 
-    Optional<ProductsEntity> findById(Integer id);
+    Optional<ProductsEntity> findById(Long id);
 
     @Query(value = "select * from products where name like %?%",nativeQuery = true)
     Page<ProductsEntity> findByName(String nameProduct,Pageable pageable);
