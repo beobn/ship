@@ -7,9 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProductDetailRepository extends PagingAndSortingRepository<ProductsdetailEntity,Integer>{
     Page<ProductsdetailEntity> findAll(Pageable pageable);
 
@@ -27,6 +29,7 @@ public interface ProductDetailRepository extends PagingAndSortingRepository<Prod
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON m.id = pd.idProduct " +
             "WHERE p.name LIKE %:nameProduct% AND m.longitude = :longitude AND m.latitude = :latitude")
-    Page<ProductDetailDTO> findAll(@Param("nameProduct") String nameProduct,Pageable pageable,Long longitude, Long latitude);
+    Page<ProductDetailDTO> findAll(@Param("nameProduct") String nameProduct,Pageable pageable,@Param
+            ("longitude") Long longitude,@Param ("latitude") Long latitude);
 
 }

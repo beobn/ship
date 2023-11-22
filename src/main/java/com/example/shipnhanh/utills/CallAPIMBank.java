@@ -1,5 +1,8 @@
 package com.example.shipnhanh.utills;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -9,10 +12,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+@Configuration
 public class CallAPIMBank {
 
-
-    public static void contentApiBank(String account ,String password) {
+    @Bean
+    public  void contentApiBank() {
         // Thông số cần thay đổi
         String taikhoanmb = ""; // Tài khoản đăng nhập mbbank của bạn tại https://online.mbbank.com.vn
         String deviceIdCommon = ""; // Thay thông số này mà bạn lấy được từ F12 vào đây
@@ -25,6 +29,7 @@ public class CallAPIMBank {
         String time2 = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", System.currentTimeMillis()) + "00";
         String todate = String.format("%1$td/%1$tm/%1$tY", System.currentTimeMillis());
         String url = "https://online.mbbank.com.vn/retail_web/common/getTransactionHistory";
+        String urlQR = "https://api.vietqr.io/image/970422-097654321-GWOSV5M.jpg?accountName=NGUYEN%20DUY%20CUONG&amount=10000&addInfo=NGUYEN%20DUY%20CUONG";
 
         try {
             Map<String, String> data = new HashMap<>();
@@ -53,6 +58,7 @@ public class CallAPIMBank {
 
             // Đọc phản hồi
             try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                System.out.println ("log in debug "+ in);
                 String inputLine;
                 StringBuilder response = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -65,6 +71,7 @@ public class CallAPIMBank {
             e.printStackTrace();
         }
     }
+
 
     private static String mapToJSON(Map<String, String> data) {
         StringBuilder result = new StringBuilder("{");

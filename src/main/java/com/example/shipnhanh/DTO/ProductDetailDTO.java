@@ -20,6 +20,8 @@ public class ProductDetailDTO {
     private BigDecimal price1;
     private BigDecimal price2;
     private Integer status;
-    private MerchantsEntity merchants;
-    private  ProductsEntity products;
+    private Long merchants;
+    private Long products;
+    private Long longitude;
+    private Long latitude;
 }

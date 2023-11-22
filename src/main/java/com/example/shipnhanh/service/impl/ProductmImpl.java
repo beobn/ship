@@ -56,7 +56,7 @@ public class ProductmImpl implements ProductService {
         for (int i=0;i<page.getContent().size();i++){
             list.add(page.getContent().get(i));
         }
-        Page<ProductsEntity> pagedto = new PageImpl<>(list, pageable, page.getTotalElements());
+        Page<ProductsEntity> pagedto = new PageImpl<>(page.getContent (), pageable, page.getTotalElements());
         return pagedto;
     }
 
