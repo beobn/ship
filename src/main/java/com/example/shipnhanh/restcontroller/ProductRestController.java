@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("admin/rest/product")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class ProductRestController {
 
 
@@ -48,6 +48,7 @@ public class ProductRestController {
         return  ResponseEntity.ok ().body (nameListStr);
     }
 
+    @GetMapping("/find-name-product")
     public ResponseEntity<ProductsEntity>  findByNameLike(@RequestParam("nameProduct")String nameProduct){
         if ( nameProduct.isEmpty()){
             System.out.println ("null name product");

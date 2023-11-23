@@ -18,18 +18,18 @@ public class ViewRestController {
     @Autowired
     MerchantsImpl serviceMerchant;
 
-    @GetMapping("/getproduct/{page}")
-    public Page<ProductsEntity> getProduct(
-            @PathVariable("page") Integer page,
-            @RequestParam("seach") String seach
-    ){
-        if(seach.length()==0 || seach==null || seach.equals("undefined")){
-            return serviceProduct.findAll(0,6*(page+1));
-        }else{
-            return serviceProduct.findByName(0,6*(page+1),seach);
-        }
-
-    }
+//    @GetMapping("/getproduct/{page}")
+//    public Page<ProductsEntity> getProduct(
+//            @PathVariable("page") Integer page,
+//            @RequestParam("seach") String seach
+//    ){
+//        if(seach.length()==0 || seach==null || seach.equals("undefined")){
+//            return serviceProduct.findAll(0,6*(page+1));
+//        }else{
+//            return serviceProduct.findByName(0,6*(page+1),seach);
+//        }
+//
+//    }
 
     @GetMapping("/getmerchant/{page}")
     public Page<MerchantsEntity> getMerchant(
