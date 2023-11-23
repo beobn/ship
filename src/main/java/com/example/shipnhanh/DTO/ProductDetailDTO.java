@@ -1,15 +1,12 @@
 package com.example.shipnhanh.DTO;
 
-import com.example.shipnhanh.entity.MerchantsEntity;
-import com.example.shipnhanh.entity.ProductsEntity;
-import lombok.*;
 
+import lombok.*;
 import java.math.BigDecimal;
 
 @Data
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class ProductDetailDTO {
@@ -24,4 +21,13 @@ public class ProductDetailDTO {
     private Long products;
     private Long longitude;
     private Long latitude;
+
+    public ProductDetailDTO(String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status) {
+        this.name = name;
+        this.nameMachanse = nameMachanse;
+        this.image = image;
+        this.price1 = price1;
+        this.price2 = price2;
+        this.status = status;
+    }
 }

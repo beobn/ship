@@ -21,7 +21,7 @@ public class MerchantsRestController {
             @PathVariable("page") Integer page,
             @RequestParam("seach") String seach
     ){
-        if(seach.length()==0 || seach==null || seach.equals("undefined")){
+        if(seach.length()==0 ){
             return service.findAll(page,5);
         }else{
             return service.findByName(page,5,seach);

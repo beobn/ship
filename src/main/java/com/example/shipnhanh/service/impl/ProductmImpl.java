@@ -35,7 +35,7 @@ public class ProductmImpl implements ProductService {
 
     @Override
     public ProductsEntity save(ProductsEntity x) {
-        return repository.save(vaLidate(x));
+        return repository.save(validate(x));
     }
 
     @Override
@@ -46,33 +46,6 @@ public class ProductmImpl implements ProductService {
             return null;
         }
         return repository.findById(id).get ();
-    }
-
-    @Override
-    public Page<ProductsEntity> findAll(int pageNumber, int maxRecord) {
-        Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductsEntity> page = repository.findAll(pageable);
-        List<ProductsEntity> list = new ArrayList();
-        for (int i=0;i<page.getContent().size();i++){
-            list.add(page.getContent().get(i));
-        }
-        Page<ProductsEntity> pagedto = new PageImpl<>(page.getContent (), pageable, page.getTotalElements());
-        return pagedto;
-    }
-
-    @Override
-    public Page<ProductsEntity> findByName(int pageNumber, int maxRecord, String nameProduct) {
-        Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductsEntity> page = repository.findByName(nameProduct,pageable);
-        List<ProductsEntity> list = new ArrayList();
-        for (int i=0;i<page.getContent().size();i++){
-            list.add(page.getContent().get(i));
-            Optional<ProductsEntity> productsEntity = Optional.ofNullable (page.getContent ().get (i));
-            productsEntity.orElseThrow ().setCountSeach (i++);
-            repository.save (productsEntity.get ());
-        }
-        Page<ProductsEntity> pagedto = new PageImpl<>(list, pageable, page.getTotalElements());
-        return pagedto;
     }
 
     @Override
@@ -87,13 +60,11 @@ public class ProductmImpl implements ProductService {
                 repository.save (productsEntity.get ());
             }
         }
-        System.out.println (page.getContent ());
         System.out.println(list.toString ());
-        Page<ProductDetailDTO> pagedto = new PageImpl<>(list, pageable, page.getTotalElements());
-        return pagedto;
+        return new PageImpl<>(list, pageable, page.getTotalElements());
     }
 
-    private ProductsEntity vaLidate(ProductsEntity x){
+    private ProductsEntity validate(ProductsEntity x){
         ProductsEntity y = new ProductsEntity();
         y.setId(x.getId());
         y.setImage(x.getImage());

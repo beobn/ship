@@ -3,7 +3,6 @@ package com.example.shipnhanh.service.impl;
 
 
 import com.example.shipnhanh.entity.MerchantsEntity;
-import com.example.shipnhanh.exception.MessMerchantsErrorData;
 import com.example.shipnhanh.exception.Validate;
 import com.example.shipnhanh.repository.MerchantsRepository;
 import com.example.shipnhanh.service.MerchantsService;
@@ -11,8 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class MerchantsImpl implements MerchantsService {
     private final MerchantsRepository repository;
     private final Validate validate;
@@ -58,7 +59,6 @@ public class MerchantsImpl implements MerchantsService {
         y.setTimeclose(x.getTimeclose());
         y.setTimeopen(x.getTimeopen());
         y.setImage(x.getImage());
-
         return y;
     }
 }

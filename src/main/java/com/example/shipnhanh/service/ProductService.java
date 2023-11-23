@@ -10,9 +10,6 @@ public interface ProductService {
     public ProductsEntity save(ProductsEntity x);
 
     public ProductsEntity findByID(Integer id);
-    Page<ProductsEntity> findAll(int pageNumber, int maxRecord);
-
-    Page<ProductsEntity> findByName(int pageNumber, int maxRecord, String nameProduct);
 
     Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct, Long longitude, Long latitude);
 }
