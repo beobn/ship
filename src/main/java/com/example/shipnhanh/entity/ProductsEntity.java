@@ -35,6 +35,7 @@ public class ProductsEntity {
     @Basic
     @Column(name = "time_seach")
     private LocalDate timeSeach;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

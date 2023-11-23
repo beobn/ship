@@ -32,8 +32,7 @@ public class OrderEntityImpl implements OrderService {
     public Page<OrderEntity> findAll(Integer min, Integer max, LocalDate startDate, LocalDate endDate) {
         Pageable pageable = PageRequest.of(min, max);
         Page<OrderEntity> page = orderRepository.findAll(pageable,startDate,endDate);
-        Page<OrderEntity> pagedto = new PageImpl<>(page.getContent(), pageable, page.getTotalElements());
-        return pagedto;
+        return new PageImpl<>(page.getContent(), pageable, page.getTotalElements());
     }
 
 }
