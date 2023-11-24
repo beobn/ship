@@ -1,7 +1,5 @@
 package com.example.shipnhanh.service.impl;
 
-
-
 import com.example.shipnhanh.entity.MerchantsEntity;
 import com.example.shipnhanh.exception.Validate;
 import com.example.shipnhanh.repository.MerchantsRepository;
@@ -48,7 +46,6 @@ public class MerchantsImpl implements MerchantsService {
     }
 
     private MerchantsEntity valiDate(MerchantsEntity x){
-
         MerchantsEntity y = new MerchantsEntity();
         y.setId(x.getId());
         y.setNameMachanse (validate.isValidateString(x.getNameMachanse ()));

@@ -1,10 +1,8 @@
 package com.example.shipnhanh.service.impl;
 
-import com.example.shipnhanh.DTO.ProductDetailDTO;
 import com.example.shipnhanh.entity.OrderEntity;
 import com.example.shipnhanh.repository.OrderRepository;
 import com.example.shipnhanh.service.OrderService;
-import jakarta.persistence.criteria.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

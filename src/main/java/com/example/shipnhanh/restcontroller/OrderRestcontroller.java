@@ -26,7 +26,7 @@ public class OrderRestcontroller {
         return   ResponseEntity.ok ().body (orderService.save (orderEntity));
     }
 
-    @GetMapping("/get-all")  // lấy hết đơn hàng
+    @GetMapping("/get-all/{page}")  // lấy hết đơn hàng
     public ResponseEntity<Page<OrderEntity>> getAllOrder(@PathVariable("page") Integer min, @RequestParam LocalDate startDate,@RequestParam LocalDate endDate){
         return  ResponseEntity.ok().body(orderService.findAll(min,
                 20,startDate,endDate));

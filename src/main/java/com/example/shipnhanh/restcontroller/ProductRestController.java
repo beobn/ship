@@ -55,7 +55,7 @@ public class ProductRestController {
             return  ResponseEntity.badRequest ().build ();
         }
         Optional<ProductsEntity>  optionalProductsEntity  = productRepository.findByName (nameProduct);
-        return ResponseEntity.ok ().body (optionalProductsEntity.isPresent() ? optionalProductsEntity.get() : null);
+        return ResponseEntity.ok ().body (optionalProductsEntity.isPresent() ? optionalProductsEntity.get() :  null);
     }
 
     @GetMapping("/getall-product-detail/{page}")  // dùng api này get data  page

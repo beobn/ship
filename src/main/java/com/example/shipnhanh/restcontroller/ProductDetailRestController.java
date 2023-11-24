@@ -33,8 +33,8 @@ public class ProductDetailRestController {
     public ProductsdetailEntity save(@RequestBody ProductDetailDTO param){
         ProductsdetailEntity prddt = new ProductsdetailEntity();
         prddt.setId(param.getId());
-//        prddt.setIdMerchants(param.getMerchants().getId());
-//        prddt.setIdProduct(param.getProducts().getId());
+        prddt.setIdMerchants(param.getId());
+        prddt.setIdProduct(param.getId());
         prddt.setPrice1(new BigDecimal(param.getPrice1().intValue()));
         if(param.getStatus()==1){
             prddt.setPrice2(new BigDecimal(0));
