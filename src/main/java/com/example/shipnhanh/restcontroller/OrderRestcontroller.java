@@ -22,7 +22,7 @@ public class OrderRestcontroller {
 
     @PostMapping("/saveOrder")
     public ResponseEntity<OrderEntity> saveOrder (@RequestBody OrderEntity orderEntity) {
-        return   ResponseEntity.ok ().body (orderService.save (orderEntity));
+        return   ResponseEntity.ok ().body (orderService.save (orderEntity,"den"));
     }
 
     @GetMapping("/get-all/{page}")  // lấy hết đơn hàng

@@ -4,22 +4,18 @@ import com.example.shipnhanh.DTO.ProductDetailDTO;
 import com.example.shipnhanh.entity.ProductsEntity;
 import com.example.shipnhanh.repository.ProductRepository;
 import com.example.shipnhanh.service.ProductService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("admin/rest/product")
-//@CrossOrigin("*")
+@CrossOrigin("*")
 public class ProductRestController {
     private final ProductRepository productRepository;
     private final ProductService productService;
-
-//    private final List<ProductsEntity> productsEntities = null;
 
 
     public ProductRestController(ProductRepository productRepository, ProductService productService) {
@@ -56,13 +52,13 @@ public class ProductRestController {
     }
 
     @GetMapping("/find-name-product")
-    public ResponseEntity<List<ProductsEntity>> findByNameLike(@RequestParam("nameProduct")String nameProduct){
+    public ResponseEntity<List<ProductDetailDTO>> findByNameLike(@RequestParam(required = false)String nameProduct){
         if ( nameProduct.isEmpty()){
-            System.out.println ("null name product");
+            System.out.println ("nameProduct null");
             return  ResponseEntity.badRequest ().build ();
         }
-        List<ProductsEntity>  listEntitiesProduct  = productRepository.findByNameLike (nameProduct);
-        for (ProductsEntity entityProductsEntity:  listEntitiesProduct ) {
+        List<ProductDetailDTO>  listEntitiesProduct = productRepository.findByNameLike (nameProduct);
+        for (ProductDetailDTO entityProductsEntity:  listEntitiesProduct ) {
             Optional<ProductsEntity> optionalProductsEntity = productRepository.findByName (nameProduct);
             optionalProductsEntity.orElseThrow ().setCountSeach (entityProductsEntity.getCountSeach ()+1);
             productRepository.save (optionalProductsEntity.get ());

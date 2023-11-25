@@ -1,10 +1,8 @@
 package com.example.shipnhanh.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDate;
 @Entity
 @Table(name = "order", schema = "shipnhanh", catalog = "")
@@ -12,6 +10,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class OrderEntity{
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

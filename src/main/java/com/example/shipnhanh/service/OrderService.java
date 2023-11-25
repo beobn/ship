@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 
 public interface OrderService {
-    OrderEntity save(OrderEntity orderEntity);
+    OrderEntity save(OrderEntity orderEntity,String username);
     Page<OrderEntity> findAll(Integer min , Integer max, LocalDate startDate, LocalDate endDate);
 }

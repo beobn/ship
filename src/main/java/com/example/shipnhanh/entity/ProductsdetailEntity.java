@@ -10,6 +10,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ProductsdetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,6 +22,7 @@ public class ProductsdetailEntity {
     @Basic
     @Column(name = "idProduct")
     private Long idProduct;
+    // khong nó báo lừa đó
 //    @Basic
 //    @Column(name = "idSize")
 //    private int idSize;

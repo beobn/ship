@@ -1,6 +1,9 @@
 package com.example.shipnhanh.service.impl;
 
+import com.example.shipnhanh.entity.AccountEntity;
 import com.example.shipnhanh.entity.OrderEntity;
+import com.example.shipnhanh.repository.AccountRepository;
+import com.example.shipnhanh.repository.OrderDetailRepository;
 import com.example.shipnhanh.repository.OrderRepository;
 import com.example.shipnhanh.service.OrderService;
 import org.springframework.data.domain.Page;
@@ -15,13 +18,20 @@ import java.time.LocalDate;
 @Service
 public class OrderEntityImpl implements OrderService {
     private  final OrderRepository orderRepository;
+    private  final OrderDetailRepository orderDetailRepository;
 
-    public OrderEntityImpl(OrderRepository orderRepository) {
+    private  final AccountRepository accountRepository;
+
+
+    public OrderEntityImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, AccountRepository accountRepository) {
         this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
-    public OrderEntity save(OrderEntity orderEntity) {
+    public OrderEntity save(OrderEntity orderEntity,String username) {
+        orderEntity.setCreLocalDate (LocalDate.now ());
         orderEntity.setStatus (0);
         return orderRepository.save (orderEntity);
     }
