@@ -14,11 +14,10 @@ import java.time.LocalDate;
 public class OrderRestcontroller {
     private  final OrderService orderService;
 
-    private  final CallAPIMBank callApiBank;
+//    private  final CallAPIMBank callApiBank;
 
-    public OrderRestcontroller(OrderService orderService, CallAPIMBank callApiBank) {
+    public OrderRestcontroller(OrderService orderService) {
         this.orderService = orderService;
-        this.callApiBank = callApiBank;
     }
 
     @PostMapping("/saveOrder")
@@ -32,12 +31,12 @@ public class OrderRestcontroller {
                 20,startDate,endDate));
     }
 
-    @GetMapping("/payment/atm-banking")
-    public ResponseEntity<Void> paymentOrderByUser (){
-        System.out.println ("source log api");
-        callApiBank.contentApiBank ();
-        return ResponseEntity.ok ().build ();
-    }
+//    @GetMapping("/payment/atm-banking")
+//    public ResponseEntity<Void> paymentOrderByUser (){
+//        System.out.println ("source log api");
+//        callApiBank.contentApiBank ();
+//        return ResponseEntity.ok ().build ();
+//    }
 
 
 

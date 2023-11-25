@@ -5,7 +5,6 @@ import com.example.shipnhanh.entity.ProductsdetailEntity;
 import com.example.shipnhanh.service.impl.ProductDetailImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 
 @RestController

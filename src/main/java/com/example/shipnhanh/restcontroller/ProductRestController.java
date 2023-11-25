@@ -10,17 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("admin/rest/product")
 //@CrossOrigin("*")
 public class ProductRestController {
-
-
     private final ProductRepository productRepository;
     private final ProductService productService;
 
 //    private final List<ProductsEntity> productsEntities = null;
+
 
     public ProductRestController(ProductRepository productRepository, ProductService productService) {
         this.productRepository = productRepository;
@@ -33,9 +33,16 @@ public class ProductRestController {
         return productService.save(param);
     }
 
-    @GetMapping("/find-id")
-    public ResponseEntity<ProductsEntity> getProductDetail(@RequestParam("id") Integer id){
-        return ResponseEntity.ok ().body (productService.findByID(id));
+    @GetMapping("/find-product-by-id")
+    public ResponseEntity<ProductsEntity> getProductDetail(@RequestParam(required = false) Long id){
+        if(id==null){
+            return  ResponseEntity.badRequest ().build ();
+        }
+        Optional<ProductsEntity> optionalProducts   = productService.findByID (id);
+        if(optionalProducts.isPresent ()){
+            return ResponseEntity.ok ().body (optionalProducts.get ());
+        }
+        return  ResponseEntity.badRequest ().build ();
     }
 
 
@@ -49,21 +56,27 @@ public class ProductRestController {
     }
 
     @GetMapping("/find-name-product")
-    public ResponseEntity<ProductsEntity>  findByNameLike(@RequestParam("nameProduct")String nameProduct){
+    public ResponseEntity<List<ProductsEntity>> findByNameLike(@RequestParam("nameProduct")String nameProduct){
         if ( nameProduct.isEmpty()){
             System.out.println ("null name product");
             return  ResponseEntity.badRequest ().build ();
         }
-        Optional<ProductsEntity>  optionalProductsEntity  = productRepository.findByName (nameProduct);
-        return ResponseEntity.ok ().body (optionalProductsEntity.isPresent() ? optionalProductsEntity.get() :  null);
+        List<ProductsEntity>  listEntitiesProduct  = productRepository.findByNameLike (nameProduct);
+        for (ProductsEntity entityProductsEntity:  listEntitiesProduct ) {
+            Optional<ProductsEntity> optionalProductsEntity = productRepository.findByName (nameProduct);
+            optionalProductsEntity.orElseThrow ().setCountSeach (entityProductsEntity.getCountSeach ()+1);
+            productRepository.save (optionalProductsEntity.get ());
+        }
+        return ResponseEntity.ok ().body (listEntitiesProduct);
     }
 
-    @GetMapping("/getall-product-detail/{page}")  // dùng api này get data  page
-    public ResponseEntity<Page<ProductDetailDTO>> getALLProductAndMechances(
-            @PathVariable("page") Integer page,
-            @RequestParam("nameProduct") String nameProduct,
-            @RequestParam("longitude")  Long longitude,
-            @RequestParam("latitude") Long latitude){
-            return ResponseEntity.ok ().body (productService.findAllProduct (page,20,nameProduct,longitude,latitude));
+    @GetMapping("/getall-product-detail")  // dùng api này get data  page
+    public ResponseEntity<List<ProductDetailDTO>> getALLProductAndMechances(
+            @RequestParam(required = false)  Long longitude,
+            @RequestParam(required = false) Long latitude){
+//        if(longitude == null || latitude == null){
+//            return ResponseEntity.badRequest ().build ();
+//        }
+        return ResponseEntity.ok ().body (productService.findAllProduct (longitude,latitude));
     }
 }

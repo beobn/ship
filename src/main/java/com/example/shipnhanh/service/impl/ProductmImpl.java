@@ -7,11 +7,8 @@ import com.example.shipnhanh.exception.Validate;
 import com.example.shipnhanh.repository.ProductDetailRepository;
 import com.example.shipnhanh.repository.ProductRepository;
 import com.example.shipnhanh.service.ProductService;
+import com.fasterxml.jackson.databind.util.ClassUtil;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,30 +36,21 @@ public class ProductmImpl implements ProductService {
     }
 
     @Override
-    public ProductsEntity findByID(Integer id) {
+    public Optional<ProductsEntity> findByID(Long id) {
         if(id ==null) {
-            System.out.println ("id null");
             validate.convertLongitude (Double.valueOf (id));
             return null;
         }
-        return repository.findById(id).get ();
+        return  repository.findById (id);
     }
 
     @Override
-    public Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct,Long longitude, Long latitude) {
-        Pageable pageable = PageRequest.of(pageNumber, maxRecord);
-        Page<ProductDetailDTO> page = productDetailRepository.findAll (nameProduct,pageable,longitude,latitude);
-        List<ProductDetailDTO> list =  page.getContent ();
-        for (int i=0;i< list.size();i++){
-            Optional<ProductsEntity> productsEntity = repository.findByName (nameProduct);
-            if(productsEntity.isPresent ()) {
-                productsEntity.orElseThrow ().setCountSeach (i++);
-                repository.save (productsEntity.get ());
-            }
-        }
-        System.out.println(list.toString ());
-        return new PageImpl<>(list, pageable, page.getTotalElements());
+    public List<ProductDetailDTO> findAllProduct(Long longitude, Long latitude) {
+        List<ProductDetailDTO> productDetailDTOList = productDetailRepository.findAll (longitude,latitude);
+            System.out.println (productDetailDTOList.toString ());
+            return productDetailDTOList;
     }
+
 
     private ProductsEntity validate(ProductsEntity x){
         ProductsEntity y = new ProductsEntity();

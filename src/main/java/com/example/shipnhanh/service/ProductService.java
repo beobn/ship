@@ -5,11 +5,14 @@ import com.example.shipnhanh.entity.ProductsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public interface ProductService {
     public ProductsEntity save(ProductsEntity x);
 
-    public ProductsEntity findByID(Integer id);
+    public Optional<ProductsEntity> findByID(Long id);
 
-    Page<ProductDetailDTO> findAllProduct(int pageNumber, int maxRecord, String nameProduct, Long longitude, Long latitude);
+    List<ProductDetailDTO> findAllProduct(Long longitude, Long latitude);
 }
