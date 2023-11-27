@@ -45,11 +45,13 @@ public class OrderEntityImpl implements OrderService {
         orderEntity = new OrderEntity ();
         String userName =  accountRepository.findNumberPhoneByUserLog (UserNameLogin.getUserName ());
         orderEntity.setCreLocalDate (LocalDate.now ());
-        orderEntity.setStatus (0);
         orderEntity.setUserId (userName);
         orderEntity.setNote (orderDTO.getNote ());
         orderEntity.setAddress (orderDTO.getAddress ());
         orderEntity.setTotal (orderDTO.getTotal ());
+        orderEntity.setPayerBy (userName);
+        orderEntity.setFeeMoney (orderDTO.getFeeMoney ());
+        orderEntity.setStatus (0);
         orderRepository.save (orderEntity);
         if(orderEntity.getId () != null){
             OrderDetailEntity orderDetailEntity = new OrderDetailEntity ();

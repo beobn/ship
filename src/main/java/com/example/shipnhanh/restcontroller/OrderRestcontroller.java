@@ -1,13 +1,17 @@
 package com.example.shipnhanh.restcontroller;
 
 import com.example.shipnhanh.DTO.OrderDTO;
+import com.example.shipnhanh.entity.OrderDetailEntity;
 import com.example.shipnhanh.entity.OrderEntity;
+import com.example.shipnhanh.exception.MessageSaveOrder;
 import com.example.shipnhanh.service.OrderDetailService;
 import com.example.shipnhanh.service.OrderService;
 import com.example.shipnhanh.utills.CallAPIMBank;
 import com.example.shipnhanh.utills.UserNameLogin;
 import jakarta.persistence.criteria.Order;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
@@ -23,14 +27,24 @@ public class OrderRestcontroller {
 
     private List<OrderEntity> orderEntityList = null;
 
+
+
     public OrderRestcontroller(OrderService orderService, OrderDetailService orderDetailService) {
         this.orderService = orderService;
         this.orderDetailService = orderDetailService;
     }
 
     @PostMapping("/saveOrder")
-    public ResponseEntity<OrderEntity> saveOrder (@RequestBody(required = false) OrderDTO orderDTO) {
-        return   ResponseEntity.ok ().body (orderService.save (orderDTO));
+    public ResponseEntity<OrderEntity> saveOrder (@ModelAttribute @Valid  OrderDTO orderDTO) {
+        try {
+            OrderEntity savedOrder = orderService.save(orderDTO);
+            MessageSaveOrder messageSaveOrder = new MessageSaveOrder ();
+            messageSaveOrder.setMessage ("Order saved successfully!");
+            messageSaveOrder.setOrder(savedOrder);
+            return ResponseEntity.ok().body(savedOrder);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/get-all/{page}")  // lấy hết đơn hàng theo người dùng
@@ -48,6 +62,16 @@ public class OrderRestcontroller {
 //        callApiBank.contentApiBank ();
 //        return ResponseEntity.ok ().build ();
 //    }
+
+     @GetMapping("/get-order-details")
+     public ResponseEntity<List<OrderDetailEntity>> getOrderDetails(
+             @RequestParam(required = false) Long idOrder
+     ){
+        if(idOrder == null){
+            return  ResponseEntity.badRequest ().build ();
+        }
+        return  ResponseEntity.ok (orderDetailService.getOrderDetails (idOrder));
+     }
 
 
 

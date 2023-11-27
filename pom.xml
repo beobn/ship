@@ -80,6 +80,12 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version> <!-- hoặc bản mới nhất hiện có -->
+        </dependency>
+
     </dependencies>
 
     <build>
