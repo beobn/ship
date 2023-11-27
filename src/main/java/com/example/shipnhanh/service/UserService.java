@@ -2,7 +2,6 @@ package com.example.shipnhanh.service;
 
 import com.example.shipnhanh.entity.AccountEntity;
 import com.example.shipnhanh.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

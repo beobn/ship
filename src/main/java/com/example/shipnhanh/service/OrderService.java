@@ -1,13 +1,12 @@
 package com.example.shipnhanh.service;
 
+import com.example.shipnhanh.DTO.OrderDTO;
 import com.example.shipnhanh.entity.OrderEntity;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
-
 import java.time.LocalDate;
+import java.util.List;
 
 public interface OrderService {
-    OrderEntity save(OrderEntity orderEntity,String username);
-    Page<OrderEntity> findAll(Integer min , Integer max, LocalDate startDate, LocalDate endDate);
+    OrderEntity save(OrderDTO orderDTO);
+    List<OrderEntity> findAll(String numberPhone);
 }

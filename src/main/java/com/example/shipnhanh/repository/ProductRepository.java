@@ -18,7 +18,11 @@ public interface ProductRepository extends JpaRepository<ProductsEntity,Integer>
     @Query(value = "update products set image = null where image = ?", nativeQuery = true) // xóa ảnh
     public void deleteImage(String image);
 
-    Optional<ProductsEntity> findById(Long id);
+    @Query("SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.id, p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status, pd.idMerchants, pd.idProduct) FROM MerchantsEntity m " +
+            "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
+            "INNER JOIN ProductsEntity p ON p.id = pd.idProduct "  +
+            "WHERE p.id = :id")
+    Optional<ProductDetailDTO> findByIdJoinProductDetail(@Param ("id") Long id);
 
     Optional<ProductsEntity> findByName(String nameProduct);
 
@@ -30,6 +34,12 @@ public interface ProductRepository extends JpaRepository<ProductsEntity,Integer>
             "INNER JOIN ProductsEntity p ON p.id = pd.idProduct " +
             "WHERE CONCAT('%',p.name, '%')  LIKE %:nameProduct%")
     List<ProductDetailDTO> findByNameLike(@Param("nameProduct")String nameProduct);
+
+    @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.id, p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status, pd.idMerchants, pd.idProduct) FROM MerchantsEntity m " +
+            "LEFT JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
+            "LEFT JOIN ProductsEntity p ON p.id = pd.idProduct " +
+            "WHERE  m.id =:idMerchants")
+    List<ProductDetailDTO> findByIdMatchanse (@Param ("idMerchants") Long idMerchants);
 
 
 }

@@ -23,18 +23,14 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-
     @PostMapping ("/save")
     public ProductsEntity save(@RequestBody ProductsEntity param){
         return productService.save(param);
     }
 
     @GetMapping("/find-product-by-id")
-    public ResponseEntity<ProductsEntity> getProductDetail(@RequestParam(required = false) Long id){
-        if(id==null){
-            return  ResponseEntity.badRequest ().build ();
-        }
-        Optional<ProductsEntity> optionalProducts   = productService.findByID (id);
+    public ResponseEntity<ProductDetailDTO> getProductDetail(@RequestParam(required = false) Long id){
+        Optional<ProductDetailDTO> optionalProducts   = productService.findByID (id);
         if(optionalProducts.isPresent ()){
             return ResponseEntity.ok ().body (optionalProducts.get ());
         }
@@ -60,8 +56,10 @@ public class ProductRestController {
         List<ProductDetailDTO>  listEntitiesProduct = productRepository.findByNameLike (nameProduct);
         for (ProductDetailDTO entityProductsEntity:  listEntitiesProduct ) {
             Optional<ProductsEntity> optionalProductsEntity = productRepository.findByName (nameProduct);
-            optionalProductsEntity.orElseThrow ().setCountSeach (entityProductsEntity.getCountSeach ()+1);
-            productRepository.save (optionalProductsEntity.get ());
+            if(optionalProductsEntity.isPresent ()){
+                optionalProductsEntity.orElseThrow ().setCountSeach (entityProductsEntity.getCountSeach ()+1);
+                productRepository.save (optionalProductsEntity.get ());
+            }
         }
         return ResponseEntity.ok ().body (listEntitiesProduct);
     }
@@ -70,9 +68,13 @@ public class ProductRestController {
     public ResponseEntity<List<ProductDetailDTO>> getALLProductAndMechances(
             @RequestParam(required = false)  Long longitude,
             @RequestParam(required = false) Long latitude){
-//        if(longitude == null || latitude == null){
-//            return ResponseEntity.badRequest ().build ();
-//        }
         return ResponseEntity.ok ().body (productService.findAllProduct (longitude,latitude));
+    }
+
+    @GetMapping("/getall-product-by-mechanse")
+    public ResponseEntity<List<ProductDetailDTO>> getAllProductByMachanse(
+            @RequestParam(required = false) Long idMerchants
+    ){
+        return ResponseEntity.ok ().body (productRepository.findByIdMatchanse (idMerchants));
     }
 }

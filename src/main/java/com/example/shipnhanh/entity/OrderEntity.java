@@ -47,4 +47,8 @@ public class OrderEntity{
     @Basic
     @Column(name ="status")
     private int status;
+
+    @Basic
+    @Column(name = "numberPhone")
+    private String numberPhone;
 }

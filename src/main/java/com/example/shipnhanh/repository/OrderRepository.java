@@ -15,6 +15,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
-    @Query( "select o from OrderEntity o where o.creLocalDate between :startDate AND :endDate")
-    Page<OrderEntity> findAll(Pageable pageable, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
+    @Query( "select o from OrderEntity o where o.userId = :numberPhone AND o.status = 1")
+    List<OrderEntity> findAll(@Param("numberPhone") String numberPhone);
 }

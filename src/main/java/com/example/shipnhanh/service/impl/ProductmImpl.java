@@ -36,12 +36,12 @@ public class ProductmImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductsEntity> findByID(Long id) {
+    public Optional<ProductDetailDTO> findByID(Long id) {
         if(id ==null) {
             validate.convertLongitude (Double.valueOf (id));
             return null;
         }
-        return  repository.findById (id);
+        return  repository.findByIdJoinProductDetail (id);
     }
 
     @Override

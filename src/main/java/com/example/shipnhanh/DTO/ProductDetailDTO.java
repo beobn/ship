@@ -4,7 +4,6 @@ package com.example.shipnhanh.DTO;
 import lombok.*;
 import java.math.BigDecimal;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,8 +16,8 @@ public class ProductDetailDTO {
     private BigDecimal price1;
     private BigDecimal price2;
     private Integer status;
-    private Long merchants;
-    private Long products;
+    private Long merchantsId;
+    private Long productsId;
     private Long longitude;
     private Long latitude;
     private Integer countSeach;
@@ -42,4 +41,16 @@ public class ProductDetailDTO {
         this.countSeach = countSeach;
     }
 
+    public ProductDetailDTO(Long Id, String name, String nameMachanse, String image,
+        BigDecimal price1, BigDecimal price2, Integer status, Long merchantsId,Long productsId) {
+        this.Id= Id;
+        this.name = name;
+        this.nameMachanse = nameMachanse;
+        this.image = image;
+        this.price1 = price1;
+        this.price2 = price2;
+        this.status = status;
+        this.merchantsId = merchantsId;
+        this.productsId = productsId;
+    }
 }
