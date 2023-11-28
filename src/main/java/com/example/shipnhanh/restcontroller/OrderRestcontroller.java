@@ -43,11 +43,12 @@ public class OrderRestcontroller {
             messageSaveOrder.setOrder(savedOrder);
             return ResponseEntity.ok().body(savedOrder);
         } catch (Exception e) {
+            e.getMessage();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/get-all/{page}")  // lấy hết đơn hàng theo người dùng
+    @GetMapping("/get-order")  // lấy hết đơn hàng theo người dùng
     public ResponseEntity<List<OrderEntity>> showHistoryOrder(){
          orderEntityList = orderService.findAll(UserNameLogin.getUserName ());
          if(orderEntityList.size ()> 0){
