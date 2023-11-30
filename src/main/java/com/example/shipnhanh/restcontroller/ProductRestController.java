@@ -66,9 +66,9 @@ public class ProductRestController {
 
     @GetMapping("/getall-product-detail")  // dùng api này get data  page
     public ResponseEntity<List<ProductDetailDTO>> getALLProductAndMechances(
-            @RequestParam(required = false)  Long longitude,
-            @RequestParam(required = false) Long latitude){
-        return ResponseEntity.ok ().body (productService.findAllProduct (longitude,latitude));
+            @RequestParam(required = false)  String longitude,
+            @RequestParam(required = false) String latitude){
+        return ResponseEntity.ok ().body (productService.findAllProduct (Double.parseDouble (longitude),Double.parseDouble (latitude)));
     }
 
     @GetMapping("/getall-product-by-mechanse")

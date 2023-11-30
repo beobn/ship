@@ -7,6 +7,7 @@ import com.example.shipnhanh.exception.MessageSaveOrder;
 import com.example.shipnhanh.service.OrderDetailService;
 import com.example.shipnhanh.service.OrderService;
 import com.example.shipnhanh.utills.CallAPIMBank;
+import com.example.shipnhanh.utills.DistanceCalculator;
 import com.example.shipnhanh.utills.UserNameLogin;
 import jakarta.persistence.criteria.Order;
 import jakarta.validation.Valid;
@@ -57,12 +58,12 @@ public class OrderRestcontroller {
         return  ResponseEntity.badRequest ().build ();
     }
 
-//    @GetMapping("/payment/atm-banking")
-//    public ResponseEntity<Void> paymentOrderByUser (){
-//        System.out.println ("source log api");
-//        callApiBank.contentApiBank ();
-//        return ResponseEntity.ok ().build ();
-//    }
+    @GetMapping("/payment/atm-banking")
+    public ResponseEntity<Void> paymentOrderByUser (){
+        System.out.println ("show log api");
+        DistanceCalculator.getNumberKm (20.20,30.032);
+        return ResponseEntity.ok ().build ();
+    }
 
      @GetMapping("/get-order-details")
      public ResponseEntity<List<OrderDetailEntity>> getOrderDetails(

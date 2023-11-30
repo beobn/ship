@@ -15,5 +15,5 @@ public interface ProductService {
 
     public Optional<ProductDetailDTO> findByID(Long id);
 
-    List<ProductDetailDTO> findAllProduct(Long longitude, Long latitude);
+    List<ProductDetailDTO> findAllProduct(Double longitude, Double latitude);
 }

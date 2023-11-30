@@ -18,8 +18,8 @@ public class ProductDetailDTO {
     private Integer status;
     private Long merchantsId;
     private Long productsId;
-    private Long longitude;
-    private Long latitude;
+    private Double longitude;
+    private Double latitude;
     private Integer countSeach;
 
     public ProductDetailDTO(String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status) {

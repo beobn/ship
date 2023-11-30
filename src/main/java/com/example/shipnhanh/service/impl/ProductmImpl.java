@@ -45,7 +45,7 @@ public class ProductmImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDetailDTO> findAllProduct(Long longitude, Long latitude) {
+    public List<ProductDetailDTO> findAllProduct(Double longitude, Double latitude) {
         List<ProductDetailDTO> productDetailDTOList = productDetailRepository.findAll (longitude,latitude);
             System.out.println (productDetailDTOList.toString ());
             return productDetailDTOList;

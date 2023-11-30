@@ -30,6 +30,6 @@ public interface ProductDetailRepository extends PagingAndSortingRepository<Prod
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON p.id = pd.idProduct " +
             "WHERE  m.longitude = :longitude AND m.latitude = :latitude")
-    List<ProductDetailDTO> findAll(@Param("longitude") Long longitude, @Param("latitude") Long latitude);
+    List<ProductDetailDTO> findAll(@Param("longitude") Double longitude, @Param("latitude") Double latitude);
 
 }

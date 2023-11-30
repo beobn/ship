@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 public class DistanceCalculator {
-        public static void main(String[] args) {
+        public static void  getNumberKm(Double longitude ,Double latitude)  {
             try {
                 String origin = "Hanoi,%20Vietnam";
                 String destination = "Ho%20Chi%20Minh%20City, Vietnam"; // Mã hóa dấu cách
@@ -37,8 +37,8 @@ public class DistanceCalculator {
                         for (int j = 0; j < elements.length(); j++) {
                             JSONObject element = elements.getJSONObject(j);
                             JSONObject location = element.getJSONObject("location");
-                            double latitude = location.getDouble("lat");
-                            double longitude = location.getDouble("lng");
+                            longitude = location.getDouble("lat");
+                            latitude = location.getDouble("lng");
                             System.out.println("Latitude: " + latitude);
                             System.out.println("Longitude: " + longitude);
 
@@ -52,6 +52,5 @@ public class DistanceCalculator {
                 e.printStackTrace();
             }
         }
-
 
 }
