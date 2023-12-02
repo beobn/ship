@@ -2,6 +2,7 @@ package com.example.shipnhanh.restcontroller;
 
 import com.example.shipnhanh.entity.AccountEntity;
 import com.example.shipnhanh.exception.Validate;
+import com.example.shipnhanh.service.AccountService;
 import com.example.shipnhanh.service.impl.AccountImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,10 +17,16 @@ import java.math.BigDecimal;
 @CrossOrigin("*")
 public class AccountRestController {
 
-    @Autowired
-    AccountImpl service;
-    @Autowired
-    Validate validate;
+    private final AccountImpl service;
+    private final Validate validate;
+
+    private final AccountService  accountService;
+
+    public AccountRestController(AccountImpl service, Validate validate, AccountService accountService) {
+        this.service = service;
+        this.validate = validate;
+        this.accountService = accountService;
+    }
 
     @GetMapping("/getall/{page}")
     public Page<AccountEntity> getALL(
@@ -34,12 +41,13 @@ public class AccountRestController {
 
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public AccountEntity Login(
-            @RequestParam("phone") String phone,
-            @RequestParam("pass") String pass
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String pass
     ){
-        return service.Login(phone,pass);
+        System.out.println ("login thành công");
+        return accountService.Login(phone,pass);
     }
 
     @GetMapping("/register")
@@ -56,5 +64,6 @@ public class AccountRestController {
         service.save(account);
         return ResponseEntity.ok (account);
     }
+
 
 }

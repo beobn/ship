@@ -68,7 +68,7 @@ public class ProductRestController {
     public ResponseEntity<List<ProductDetailDTO>> getALLProductAndMechances(
             @RequestParam(required = false)  String longitude,
             @RequestParam(required = false) String latitude){
-        return ResponseEntity.ok ().body (productService.findAllProduct (Double.parseDouble (longitude),Double.parseDouble (latitude)));
+        return ResponseEntity.ok ().body (productService.findAllProduct (56.00,43.00));
     }
 
     @GetMapping("/getall-product-by-mechanse")

@@ -29,7 +29,7 @@ public interface ProductDetailRepository extends PagingAndSortingRepository<Prod
     @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status) FROM MerchantsEntity m " +
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON p.id = pd.idProduct " +
-            "WHERE  m.longitude = :longitude AND m.latitude = :latitude")
+            "WHERE  m.longitude = 43 AND m.latitude = 56")
     List<ProductDetailDTO> findAll(@Param("longitude") Double longitude, @Param("latitude") Double latitude);
 
 }

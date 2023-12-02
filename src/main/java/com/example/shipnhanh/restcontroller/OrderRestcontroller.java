@@ -61,7 +61,7 @@ public class OrderRestcontroller {
     @GetMapping("/payment/atm-banking")
     public ResponseEntity<Void> paymentOrderByUser (){
         System.out.println ("show log api");
-        DistanceCalculator.getNumberKm (20.20,30.032);
+        DistanceCalculator.getNumberKm (43.55,30.032);
         return ResponseEntity.ok ().build ();
     }
 
