@@ -22,13 +22,14 @@ public class ProductDetailDTO {
     private Double latitude;
     private Integer countSeach;
 
-    public ProductDetailDTO(String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status) {
+    public ProductDetailDTO(Long id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status) {
         this.name = name;
         this.nameMachanse = nameMachanse;
         this.image = image;
         this.price1 = price1;
         this.price2 = price2;
         this.status = status;
+        this.Id = id;
     }
     public ProductDetailDTO(Long Id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status ,Integer countSeach) {
         this.Id= Id;
