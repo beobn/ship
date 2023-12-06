@@ -36,12 +36,13 @@ public class ProductmImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductDetailDTO> findByID(Long id) {
+    public Optional<ProductDetailDTO> findByID(Long id, Long idMerchants) {
         if(id ==null) {
             validate.convertLongitude (Double.valueOf (id));
             return null;
         }
-        return  repository.findByIdJoinProductDetail (id);
+        System.out.println("==== "+idMerchants);
+        return  repository.findByIdJoinProductDetail (id,idMerchants);
     }
 
     @Override

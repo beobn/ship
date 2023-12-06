@@ -29,8 +29,9 @@ public class ProductRestController {
     }
 
     @GetMapping("/find-product-by-id")
-    public ResponseEntity<ProductDetailDTO> getProductDetail(@RequestParam(required = false) Long id){
-        Optional<ProductDetailDTO> optionalProducts   = productService.findByID (id);
+    public ResponseEntity<ProductDetailDTO> getProductDetail(@RequestParam(required = false) Long id,
+            @RequestParam(required = false) Long idMerchants){
+        Optional<ProductDetailDTO> optionalProducts   = productService.findByID (id,idMerchants);
         if(optionalProducts.isPresent ()){
             return ResponseEntity.ok ().body (optionalProducts.get ());
         }
@@ -47,6 +48,7 @@ public class ProductRestController {
         return  ResponseEntity.ok ().body (nameListStr);
     }
 
+    // search by name
     @GetMapping("/find-name-product")
     public ResponseEntity<List<ProductDetailDTO>> findByNameLike(@RequestParam(required = false)String nameProduct){
         if ( nameProduct.isEmpty()){
@@ -64,7 +66,8 @@ public class ProductRestController {
         return ResponseEntity.ok ().body (listEntitiesProduct);
     }
 
-    @GetMapping("/getall-product-detail")  // dùng api này get data  page
+    // search sp recently
+    @GetMapping("/getall-product-detail")
     public ResponseEntity<List<ProductDetailDTO>> getALLProductAndMechances(
             @RequestParam(required = false)  String longitude,
             @RequestParam(required = false) String latitude){

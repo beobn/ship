@@ -33,6 +33,7 @@ public class DistanceCalculator {
                     + "?origins=" + origin.replaceAll(" ", "%20")
                     + "&destinations=" + destination
                     + "&key=" + apiKey;
+            System.out.println(apiUrl);
 
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -68,10 +69,7 @@ public class DistanceCalculator {
 
     private static void calculateDeliveryCost(double distance, int itemsCount, boolean isNight, boolean isRain, double orderValue) {
         double deliveryCost = 0;
-
         deliveryCost += BASE_RATE;
-        System.out.println ("sooooooooooooooooooooooooo  "+deliveryCost);
-
         if (distance > 2) {
             deliveryCost += (distance - 2) * ADDITIONAL_RATE;
         }
@@ -91,7 +89,6 @@ public class DistanceCalculator {
         deliveryCost += DOOR_DELIVERY_EXTRA;
 
         deliveryCost += orderValue * 0.01; // Phụ phí 1% giá trị hoá đơn
-
         System.out.println("Total delivery cost: " + deliveryCost + " V ");
     }
 

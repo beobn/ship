@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProductService {
     public ProductsEntity save(ProductsEntity x);
 
-    public Optional<ProductDetailDTO> findByID(Long id);
+    public Optional<ProductDetailDTO> findByID(Long id, Long idMerchants);
 
     List<ProductDetailDTO> findAllProduct(Double longitude, Double latitude);
 }
