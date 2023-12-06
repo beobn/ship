@@ -21,12 +21,11 @@ public interface ProductDetailRepository extends PagingAndSortingRepository<Prod
 
     @Query(value = "select * from productsdetail  where name like N%?%",nativeQuery = true)
     Page<ProductsdetailEntity> findByName(String name,Pageable pageable);
-    // query này t k dùng ô sửa cg v
 
     @Query(value = "select * from productsdetail  where idProduct=?",nativeQuery = true)
     Page<ProductsdetailEntity> findByProduct(String name,Pageable pageable);
 
-    @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.id, p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status) FROM MerchantsEntity m " +
+    @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.id, p.name, m.nameMachanse, p.image, pd.price1, pd.price2, pd.status, pd.idMerchants) FROM MerchantsEntity m " +
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON p.id = pd.idProduct " +
             "WHERE  m.longitude = 43 AND m.latitude = 56")

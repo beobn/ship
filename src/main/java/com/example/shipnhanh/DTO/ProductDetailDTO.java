@@ -22,7 +22,7 @@ public class ProductDetailDTO {
     private Double latitude;
     private Integer countSeach;
 
-    public ProductDetailDTO(Long id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status) {
+    public ProductDetailDTO(Long id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status, Long merchantsId) {
         this.name = name;
         this.nameMachanse = nameMachanse;
         this.image = image;
@@ -30,6 +30,7 @@ public class ProductDetailDTO {
         this.price2 = price2;
         this.status = status;
         this.Id = id;
+        this.merchantsId = merchantsId;
     }
     public ProductDetailDTO(Long Id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status ,Integer countSeach,
                             Long merchantsId) {
