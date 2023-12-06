@@ -7,11 +7,8 @@ import com.example.shipnhanh.exception.Validate;
 import com.example.shipnhanh.repository.ProductDetailRepository;
 import com.example.shipnhanh.repository.ProductRepository;
 import com.example.shipnhanh.service.ProductService;
-import com.fasterxml.jackson.databind.util.ClassUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
