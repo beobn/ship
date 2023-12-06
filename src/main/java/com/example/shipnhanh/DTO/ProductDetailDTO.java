@@ -33,7 +33,7 @@ public class ProductDetailDTO {
         this.merchantsId = merchantsId;
     }
     public ProductDetailDTO(Long Id, String name, String nameMachanse, String image, BigDecimal price1, BigDecimal price2, Integer status ,Integer countSeach,
-                            Long merchantsId) {
+            Long merchantsId, Long productsId) {
         this.Id= Id;
         this.name = name;
         this.nameMachanse = nameMachanse;
@@ -43,6 +43,7 @@ public class ProductDetailDTO {
         this.status = status;
         this.countSeach = countSeach;
         this.merchantsId = merchantsId;
+        this.productsId = productsId;
     }
 
     public ProductDetailDTO(Long Id, String name, String nameMachanse, String image,

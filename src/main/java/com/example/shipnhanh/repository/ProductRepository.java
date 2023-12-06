@@ -30,7 +30,7 @@ public interface ProductRepository extends JpaRepository<ProductsEntity,Integer>
     List<String> findProductRecently();
 
     @Query(value = "SELECT new com.example.shipnhanh.DTO.ProductDetailDTO(p.id, p.name, m.nameMachanse, p.image, pd.price1, " +
-            "pd.price2, pd.status, p.countSeach, pd.idMerchants) FROM MerchantsEntity m " +
+            "pd.price2, pd.status, p.countSeach, pd.idMerchants, pd.idProduct) FROM MerchantsEntity m " +
             "INNER JOIN ProductsdetailEntity pd ON m.id = pd.idMerchants " +
             "INNER JOIN ProductsEntity p ON p.id = pd.idProduct " +
             "WHERE CONCAT('%',p.name, '%')  LIKE %:nameProduct%")
