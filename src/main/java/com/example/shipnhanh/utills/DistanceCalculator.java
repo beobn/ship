@@ -21,18 +21,23 @@ public class DistanceCalculator {
     private final static double DOOR_DELIVERY_EXTRA = 3000;
 
     public static void main(String[] args) {
-        getNumberKm (20.203,95.304);
+        getNumberKm ();
     }
-    public static void  getNumberKm(Double longitude ,Double latitude)  {
+    public static void  getNumberKm()  {
         try {
-            String origin = "Hanoi,%20Vietnam";
-            String destination = "Ho%20Chi%20Minh%20City, Vietnam"; // Mã hóa dấu cách
+            double originLat = 21.0373312; // Vĩ độ điểm xuất phát
+            double originLon = 106.0222085; // Kinh độ điểm xuất phát (dien kinh do , vi do)
+
+            double destinationLat = 21.02827; // Vĩ độ điểm đến
+            double destinationLon = 106.0074775; // Kinh độ điểm đến
+
             String apiKey = "AIzaSyCN7wkQpBMR6nIE0pZrLkndpnvJCDm-8ps";
 
-            String apiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json"
-                    + "?origins=" + origin.replaceAll(" ", "%20")
-                    + "&destinations=" + destination
-                    + "&key=" + apiKey;
+            String apiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json" +
+                    "?origins=" + originLat + "," + originLon +
+                    "&destinations=" + destinationLat + "," + destinationLon +
+                    "&key=" + apiKey;
+
             System.out.println(apiUrl);
 
             HttpClient client = HttpClient.newHttpClient();
@@ -42,6 +47,7 @@ public class DistanceCalculator {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
+                System.out.println(response.body());
                 String responseData = response.body();
                 JSONObject jsonObject = new JSONObject(responseData);
                 JSONArray rows = jsonObject.getJSONArray("rows");
@@ -62,8 +68,6 @@ public class DistanceCalculator {
             e.printStackTrace();
         }
     }
-
-
 
 
 
@@ -89,7 +93,7 @@ public class DistanceCalculator {
         deliveryCost += DOOR_DELIVERY_EXTRA;
 
         deliveryCost += orderValue * 0.01; // Phụ phí 1% giá trị hoá đơn
-        System.out.println("Total delivery cost: " + deliveryCost + " V ");
+        System.out.println("Só tien ship : " + deliveryCost + " V ");
     }
 
 
