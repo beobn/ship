@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Component
 public class UserService implements UserDetailsService {
@@ -21,9 +23,9 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String numberPhone) throws UsernameNotFoundException {
-        AccountEntity account = accountRepository.findByNumberphone(numberPhone);
-        if (account != null && account.getNumberphone ().equals(numberPhone)){
-            return User.withUsername(numberPhone).password(account.getPassword()).roles(String.valueOf (account.getRole())).build();
+        Optional<AccountEntity> account = accountRepository.findByNumberphone(numberPhone);
+        if (account != null && account.get ().getNumberphone ().equals(numberPhone)){
+            return User.withUsername(numberPhone).password(account.get ().getPassword()).roles(String.valueOf (account.get ().getRole())).build();
         }
         throw new UsernameNotFoundException("User not found with the name " + numberPhone);
     }

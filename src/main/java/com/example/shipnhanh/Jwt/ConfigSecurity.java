@@ -20,12 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
-@Configuration//File cấu hình
+@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)//Cho phép sử dụng Annotation trong @Controller
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ConfigSecurity {
-    //HttpSecurity: Phân quyền sử dụng
-    //Cau hinh, chi thi phuong thuc login
     @Autowired
     private HttpServletRequest request;
     @Autowired

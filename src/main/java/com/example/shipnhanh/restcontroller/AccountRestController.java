@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("rest/account")
@@ -86,13 +87,12 @@ public class AccountRestController {
     ){
         final UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
         final String token = generateToken(userDetails);
-        AccountEntity account =  accountService.Login(phone,pass);
-        if(!account.getNumberphone().isEmpty()){
-            account.setToken(token);
-            accountService.save(account);
-            System.out.println("Luu thanh cong " + token);
+        Optional<AccountEntity> account =  accountService.Login(phone,pass);
+        if (account.isPresent ()){
+            account.get ().setToken (token);
+            accountService.updateAcByNumberPhone (token,account.get ().getNumberphone ());
+            System.out.println ("login thành công "+ account.get ().getNumberphone ());
         }
-        System.out.println ("login thành công "+ account.getNumberphone ());
         return ResponseEntity.ok ( token);
     }
 

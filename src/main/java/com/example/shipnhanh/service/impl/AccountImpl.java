@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountImpl implements AccountService {
     private final AccountRepository repository;
@@ -29,11 +31,11 @@ public class AccountImpl implements AccountService {
     }
 
     @Override
-    public AccountEntity Login(String phone,String pass) {
+    public Optional<AccountEntity> Login(String phone, String pass) {
 
         if(checkDuplicates(validate.convertNumberPhone(phone))){
-            AccountEntity acc = repository.findByNumberphone(validate.convertNumberPhone(phone));
-            if(!acc.getPassword().equals(validate.isValidateString(pass))){
+            Optional<AccountEntity> acc = repository.findByNumberphone(validate.convertNumberPhone(phone));
+            if(!acc.get().getPassword().equals(validate.isValidateString(pass))){
                 throw new MessAccountError("Số điện thoại hoặc mật khẩu không chính xác");
             }
             return acc;
@@ -55,6 +57,11 @@ public class AccountImpl implements AccountService {
         Pageable pageable = PageRequest.of(pageNumber, maxRecord);
         Page<AccountEntity> page = repository.findByPhone(phone,pageable);
         return page;
+    }
+
+    @Override
+    public void updateAcByNumberPhone(String token, String numberPhone) {
+        repository.updateAccountByPhone (token,numberPhone);
     }
 
     private Boolean checkDuplicates(String phone){
