@@ -83,12 +83,15 @@ public class AccountRestController {
     public ResponseEntity<String> Login(
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String pass
-
     ){
-
         final UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
         final String token = generateToken(userDetails);
         AccountEntity account =  accountService.Login(phone,pass);
+        if(!account.getNumberphone().isEmpty()){
+            account.setToken(token);
+            accountService.save(account);
+            System.out.println("Luu thanh cong " + token);
+        }
         System.out.println ("login thành công "+ account.getNumberphone ());
         return ResponseEntity.ok ( token);
     }

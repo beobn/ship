@@ -1,12 +1,16 @@
 package com.example.shipnhanh.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @Table(name = "account", schema = "shipnhanh", catalog = "")
+@Getter
+@Setter
 public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -27,54 +31,9 @@ public class AccountEntity {
     @Basic
     @Column(name = "checkboom")
     private int checkboom;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNumberphone() {
-        return numberphone;
-    }
-
-    public void setNumberphone(String numberphone) {
-        this.numberphone = numberphone;
-    }
-
-    public BigDecimal getPay() {
-        return pay;
-    }
-
-    public void setPay(BigDecimal pay) {
-        this.pay = pay;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    public int getCheckboom() {
-        return checkboom;
-    }
-
-    public void setCheckboom(int checkboom) {
-        this.checkboom = checkboom;
-    }
+    @Basic
+    @Column(name = "tokens")
+    private String token;
 
     @Override
     public boolean equals(Object o) {

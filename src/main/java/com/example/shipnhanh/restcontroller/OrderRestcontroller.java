@@ -51,7 +51,8 @@ public class OrderRestcontroller {
 
     @GetMapping("/get-order")  // lấy hết đơn hàng theo người dùng
     public ResponseEntity<List<OrderEntity>> showHistoryOrder(){
-         orderEntityList = orderService.findAll(UserNameLogin.getUserName ());
+        orderEntityList = orderService.findAll(UserNameLogin.getUserName ());
+        System.out.println("user login " + UserNameLogin.getUserName());
          if(orderEntityList.size ()> 0){
              return  ResponseEntity.ok().body(orderEntityList);
          }
@@ -62,7 +63,7 @@ public class OrderRestcontroller {
     public ResponseEntity<Void> paymentOrderByUser (){
         System.out.println ("show log api");
         DistanceCalculator.getNumberKm ();
-        return ResponseEntity.ok ().build ();
+        return ResponseEntity.ok ().build();
     }
 
      @GetMapping("/get-order-details")
